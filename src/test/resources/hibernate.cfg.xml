@@ -15,6 +15,6 @@
         <!-- Przy starcie aplikacji usun istniejaca baze i utworz ja od nowa -->
         <property name="hbm2ddl.auto">create-drop</property>
         <!-- Klasy mapowane -->
-        <mapping class="pl.sda.hibernate_test.model.Movie"/>
+        <mapping class="models.Movie"/>
     </session-factory>
-</hibernate-configuratio
+</hibernate-configuration>

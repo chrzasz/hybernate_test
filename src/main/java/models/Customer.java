@@ -20,6 +20,6 @@ public class Customer {
     @GeneratedValue
     private Long id;
     private String fullName;
-//    private List<Rank> ranks;
-//    private List<Rent> rents;
+    private List<Rank> ranks;
+    private List<Rent> rents;
 }

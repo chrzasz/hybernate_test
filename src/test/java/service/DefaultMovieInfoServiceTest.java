@@ -34,6 +34,10 @@ public class DefaultMovieInfoServiceTest {
         insertMoviesIntoDb();
     }
 
+    //run this after every method execution
+    @AfterTest
+    public void cleanUpDB() {}
+
 
     @Test
     public void shouldPersistGivenMovies() {
@@ -43,7 +47,6 @@ public class DefaultMovieInfoServiceTest {
             assertEquals(mi.getTitle(), testTitle);
             assertEquals(mi.getAvgScore(), 8.5, "Score for this movie should be 8.5!");
         }
-
     }
 
     //oba testy maja sprawdzac dzialanie metod findOrCreate

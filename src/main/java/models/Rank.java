@@ -21,5 +21,6 @@ public class Rank {
     private Long id;
     private String option;
     private Double score;
-
+    private Customer customer;
+    private MovieInfo movieInfo;
 }

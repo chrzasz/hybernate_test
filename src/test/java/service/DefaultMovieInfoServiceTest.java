@@ -14,6 +14,9 @@ import static org.testng.Assert.*;
 
 public class DefaultMovieInfoServiceTest {
 
+    private String testTitle = "Ogniem i Mieczem";
+    private String testTitle2 = "Alien vs Predator";
+
     SessionFactory sessionFactory;
     MovieInfoService movieInfoService = new DefaultMovieInfoService();
 
@@ -31,29 +34,30 @@ public class DefaultMovieInfoServiceTest {
     @Test
     public void shouldPersistGivenMovies() {
 
-        insertMoviesIntoDb();
+//        insertMoviesIntoDb();
         try (Session session = sessionFactory.openSession()) {
-            MovieInfo mi = movieInfoService.findMovieInfo(session, "Ogniem i Mieczem");
+            MovieInfo mi = movieInfoService.findMovieInfo(session, testTitle);
             assertNotNull(mi.getId(), "Hibernate should set ID for this instance already");
-            assertEquals(mi.getTitle(), "Ogniem i Mieczem");
+            assertEquals(mi.getTitle(), testTitle);
             assertEquals(mi.getAvgScore(), 8.5, "Score for this movie should be 8.5!");
         }
 
     }
+
     //oba testy maja sprawdzac dzialanie metod findOrCreate
     @Test
     public void shouldFindCreatedMovie() {
         insertMoviesIntoDb();
-        try(Session session = sessionFactory.openSession()) {
-            MovieInfo mi = movieInfoService.findOrCreateMovieInfo(session, "Ogniem i Mieczem");
+        try (Session session = sessionFactory.openSession()) {
+            MovieInfo mi = movieInfoService.findOrCreateMovieInfo(session, testTitle);
             assertNotNull(mi.getAvgScore(), "Score should not be null");
         }
     }
 
     @Test
     public void shouldCreateNotFoundMovie() {
-        try(Session session = sessionFactory.openSession()) {
-            MovieInfo mi = movieInfoService.findOrCreateMovieInfo(session, "Ogniem i Mieczem");
+        try (Session session = sessionFactory.openSession()) {
+            MovieInfo mi = movieInfoService.findOrCreateMovieInfo(session, testTitle);
             assertNull(mi.getAvgScore(), "Score should be null");
             assertEquals(mi.getTitle(), "Ogniem i Mieczem");
             assertNotNull(mi.getId(), "ID should already exist");
@@ -61,6 +65,18 @@ public class DefaultMovieInfoServiceTest {
     }
 
     @Test
+    public void shouldUpdateAvgScoreForMovies() {
+//        insertMoviesIntoDb();
+        try (Session session = sessionFactory.openSession()) {
+            MovieInfo mi = movieInfoService.findOrCreateMovieInfo(session, testTitle);
+            assertEquals(mi.getAvgScore(), 8.5);
+            movieInfoService.updateMovieInfo(session, testTitle, 8.23);
+        }
+        try (Session session = sessionFactory.openSession()) {
+            MovieInfo mi = movieInfoService.findOrCreateMovieInfo(session, testTitle);
+            assertEquals(mi.getAvgScore(), 8.23);
+        }
+    }
 
     private MovieInfo createMovieInfo(final String title, final Double avgScore) {
         return MovieInfo.builder()
@@ -72,8 +88,8 @@ public class DefaultMovieInfoServiceTest {
     private void insertMoviesIntoDb() {
         try (Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
-            session.persist(createMovieInfo("Ogniem i Mieczem", 8.5));
-            session.persist(createMovieInfo("Alien vs Predator", 9.5));
+            session.persist(createMovieInfo(testTitle, 8.5));
+            session.persist(createMovieInfo(testTitle2, 9.5));
             session.persist(createMovieInfo("JAX", 3.5));
             tx.commit();
         }

@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
@@ -29,12 +30,13 @@ public class DefaultMovieInfoServiceTest {
         sessionFactory = new MetadataSources(registry)
                 .buildMetadata()
                 .buildSessionFactory();
+
+        insertMoviesIntoDb();
     }
+
 
     @Test
     public void shouldPersistGivenMovies() {
-
-//        insertMoviesIntoDb();
         try (Session session = sessionFactory.openSession()) {
             MovieInfo mi = movieInfoService.findMovieInfo(session, testTitle);
             assertNotNull(mi.getId(), "Hibernate should set ID for this instance already");
@@ -47,7 +49,6 @@ public class DefaultMovieInfoServiceTest {
     //oba testy maja sprawdzac dzialanie metod findOrCreate
     @Test
     public void shouldFindCreatedMovie() {
-        insertMoviesIntoDb();
         try (Session session = sessionFactory.openSession()) {
             MovieInfo mi = movieInfoService.findOrCreateMovieInfo(session, testTitle);
             assertNotNull(mi.getAvgScore(), "Score should not be null");
@@ -57,16 +58,15 @@ public class DefaultMovieInfoServiceTest {
     @Test
     public void shouldCreateNotFoundMovie() {
         try (Session session = sessionFactory.openSession()) {
-            MovieInfo mi = movieInfoService.findOrCreateMovieInfo(session, testTitle);
+            MovieInfo mi = movieInfoService.findOrCreateMovieInfo(session, "Dzieci z dworca ZOO");
             assertNull(mi.getAvgScore(), "Score should be null");
-            assertEquals(mi.getTitle(), "Ogniem i Mieczem");
+            assertEquals(mi.getTitle(), "Dzieci z dworca ZOO");
             assertNotNull(mi.getId(), "ID should already exist");
         }
     }
 
     @Test
     public void shouldUpdateAvgScoreForMovies() {
-//        insertMoviesIntoDb();
         try (Session session = sessionFactory.openSession()) {
             MovieInfo mi = movieInfoService.findOrCreateMovieInfo(session, testTitle);
             assertEquals(mi.getAvgScore(), 8.5);

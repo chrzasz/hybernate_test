@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Data
@@ -23,5 +24,7 @@ public class MovieInfo {
 
     private String title;
     private Double avgScore;
+
+    @OneToMany
     private List<MovieCopy> copies;
 }

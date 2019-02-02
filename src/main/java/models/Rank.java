@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Data
 @AllArgsConstructor
@@ -20,7 +21,10 @@ public class Rank {
     @GeneratedValue
     private Long id;
     private String option;
-    private Double score;
+
+    @ManyToOne
     private Customer customer;
+
+    @ManyToOne
     private MovieInfo movieInfo;
 }

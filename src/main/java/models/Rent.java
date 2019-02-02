@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Data
 @AllArgsConstructor
@@ -21,5 +22,6 @@ public class Rent {
     private Long id;
     private Boolean isOpinionProvided;
     private Customer customer;
+    @ManyToOne
     private MovieCopy movieCopy;
 }

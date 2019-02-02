@@ -16,5 +16,6 @@
         <property name="hbm2ddl.auto">create-drop</property>
         <!-- Klasy mapowane -->
         <mapping class="models.Movie"/>
+        <mapping class="models.MovieInfo"/>
     </session-factory>
 </hibernate-configuration>

@@ -21,7 +21,10 @@ public class Rent {
     @GeneratedValue
     private Long id;
     private Boolean isOpinionProvided;
+
+    @ManyToOne
     private Customer customer;
+
     @ManyToOne
     private MovieCopy movieCopy;
 }

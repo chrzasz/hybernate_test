@@ -22,5 +22,5 @@ public class MovieCopy {
     private MovieInfo movieInfo;
 
     @OneToMany(mappedBy = "movieCopy")
-    private List<Rent> rents
+    private List<Rent> rents;
 }

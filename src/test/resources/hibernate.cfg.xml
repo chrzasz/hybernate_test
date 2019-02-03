@@ -25,6 +25,7 @@
         <mapping class="models.EmailMapped"/>
         <mapping class="models.Message"/>
         <mapping class="models.MessageMapped"/>
+        <mapping class="models.MovieInfoValidated"/>
 
     </session-factory>
 </hibernate-configuration>

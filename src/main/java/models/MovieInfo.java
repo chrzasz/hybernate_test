@@ -25,9 +25,9 @@ public class MovieInfo {
     private String title;
     private Double avgScore;
 
-    @OneToMany(mappedBy = "movieInfo")
+    @OneToMany(orphanRemoval = true, mappedBy = "movieInfo")
     private List<MovieCopy> copies;
 
-    @OneToMany(mappedBy = "movieInfo")
+    @OneToMany(orphanRemoval = true, mappedBy = "movieInfo")
     private List<Rank> ranks;
 }

@@ -20,7 +20,10 @@ public class Rank {
     @Id
     @GeneratedValue
     private Long id;
+
     private String option;
+
+    private Double score;
 
     @ManyToOne
     private Customer customer;

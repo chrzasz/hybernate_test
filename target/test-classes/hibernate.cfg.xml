@@ -17,5 +17,10 @@
         <!-- Klasy mapowane -->
         <mapping class="models.Movie"/>
         <mapping class="models.MovieInfo"/>
+        <mapping class="models.MovieCopy"/>
+        <mapping class="models.Rank"/>
+        <mapping class="models.Rent"/>
+        <mapping class="models.Customer"/>
+
     </session-factory>
 </hibernate-configuration>

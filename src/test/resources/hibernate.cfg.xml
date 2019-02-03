@@ -21,6 +21,10 @@
         <mapping class="models.Rank"/>
         <mapping class="models.Rent"/>
         <mapping class="models.Customer"/>
+        <mapping class="models.Email"/>
+        <mapping class="models.EmailMapped"/>
+        <mapping class="models.Message"/>
+        <mapping class="models.MessageMapped"/>
 
     </session-factory>
 </hibernate-configuration>
